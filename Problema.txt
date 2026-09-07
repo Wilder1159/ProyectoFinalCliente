@@ -1,0 +1,13 @@
+Se desea procesar las operaciones de un cliente de telefonía móvil, a quien se le pide por única vez
+su nombre y su saldo inicial de recarga. Luego, en un proceso repetitivo se presentan las siguientes
+opciones: Recarga, Consumo, Fin.
+Si la opción elegida es ‘R’ (Recarga), se pide si es con tarjeta (1) o en efectivo (2), se ingresa la
+cantidad, y si fuese con tarjeta se descuenta el 2% por comisión y se actualiza el saldo mostrándolo
+en pantalla. Si la opción elegida es ‘C’ (Consumo), se ingresa la cantidad verificando que ésta sea
+Facultad de Ingeniería de Sistemas y Electrónica
+Escuela de Ingeniería de Sistemas menor o igual al saldo; si lo es, se actualiza el saldo, de lo contrario se muestra un mensaje de saldo
+insuficiente. Si la opción elegida es ‘F’ (Fin), se deben mostrar los siguientes resultados:
+• Nombre del cliente y saldo inicial.
+• Saldo final.
+• Número de recargas realizadas en efectivo y con tarjeta.
+• Número total de consumos efectuados.
