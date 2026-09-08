@@ -45,7 +45,7 @@ public class ClienteTelefoniaController {
     }
     
     public int obtenerRecargasTarjeta() {
-        return clienteActual.getRecargasEfectivo();
+        return clienteActual.getRecargasTarjeta();
     }
     
     public int obtenerRecargasEfectivo() {
