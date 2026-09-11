@@ -14,6 +14,13 @@ public class JMain extends javax.swing.JFrame {
         
         controller = new ClienteTelefoniaController();
     }
+    
+    //el segundo constructor con parametros, el primero se crea sin parametros
+    public JMain(ClienteTelefoniaController controller) {
+        initComponents();
+        
+        this.controller = controller; 
+    }
 
 
     @SuppressWarnings("unchecked")

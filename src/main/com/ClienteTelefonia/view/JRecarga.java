@@ -62,6 +62,11 @@ public class JRecarga extends javax.swing.JFrame {
         btnRecargar.setText("RECARGAR");
 
         jButton2.setText("VOLVER");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -124,6 +129,16 @@ public class JRecarga extends javax.swing.JFrame {
         //solo se muestra
         
     }//GEN-LAST:event_txtClienteActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+      //ACCIONES PARA VOLVER ATRAS Y QUE SE MANTENGA EL MISMO CLIENTE Y NO SE PIERDA
+      
+      JMain viewMain = new JMain(clienteController);    
+      viewMain.setVisible(true);
+      
+      this.dispose();
+      
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
