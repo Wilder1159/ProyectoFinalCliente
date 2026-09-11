@@ -91,7 +91,7 @@ public class JMain extends javax.swing.JFrame {
         ClienteTelefonia cliente = controller.obtenerClienteActual();       
         
         //INSTANCIA PARA ABRIR EL JRecarga -- si compila bien
-        JRecarga viewRecarga = new JRecarga();
+        JRecarga viewRecarga = new JRecarga(controller);    
         viewRecarga.setVisible(true);
         this.setVisible(false);//oculta el JMain, no se cierra
     }//GEN-LAST:event_btnConActionPerformed
@@ -115,6 +115,7 @@ public class JMain extends javax.swing.JFrame {
         }
        
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new JMain().setVisible(true);
             }
