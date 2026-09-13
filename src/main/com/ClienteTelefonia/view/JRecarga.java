@@ -153,7 +153,7 @@ public class JRecarga extends javax.swing.JFrame {
         
         controller.realizarRecarga(tipo, monto);
         
-        javax.swing.JOptionPane.showMessageDialog(this, "Recarga exitosa.\n" + "Saldo Actuak: S/" + controller.obtenerSaldoActual());
+        javax.swing.JOptionPane.showMessageDialog(this, "Recarga exitosa.\n" + "Saldo Actual: S/" + controller.obtenerSaldoActual());
         
         txtMonto.setText("");
     }//GEN-LAST:event_btnRecargarActionPerformed

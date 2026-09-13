@@ -91,6 +91,11 @@ public class MenuOpciones extends javax.swing.JFrame {
         menuOperaciones.add(itemRecarga);
 
         itemConsumo.setText("Consumo");
+        itemConsumo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemConsumoActionPerformed(evt);
+            }
+        });
         menuOperaciones.add(itemConsumo);
 
         lblMenuPrincipal.add(menuOperaciones);
@@ -143,12 +148,24 @@ public class MenuOpciones extends javax.swing.JFrame {
             javax.swing.JOptionPane.showConfirmDialog(this, "Primero debes de crear al cliente");
             return;
         }
-        //se llama la instancia ve viewRecarga
+        //se llama la instancia de viewRecarga
         JRecarga viewRecarga = new JRecarga(controller);
         viewRecarga.setVisible(true);
     
         this.dispose();
     }//GEN-LAST:event_itemRecargaActionPerformed
+
+    private void itemConsumoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemConsumoActionPerformed
+        // crear el boton de consumo desde el menu de opciones
+        if (!controller.existeCliente()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Crear primero al cliente para poder realizar la operacion.");
+            return;
+        } 
+        //esta ob se trata al momento de dar click al consumo, nos da a la ventana de consumo
+        JConsumo viewConsumo = new JConsumo(controller);
+        viewConsumo.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_itemConsumoActionPerformed
  
   
     public static void main(String args[]) {
