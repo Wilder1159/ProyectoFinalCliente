@@ -2,23 +2,17 @@
 package main.com.ClienteTelefonia.view;
 
 import main.com.ClienteTelefonia.controller.ClienteTelefoniaController;
-import main.com.ClienteTelefonia.model.ClienteTelefonia;
 
 
 
 public class JRecarga extends javax.swing.JFrame {
 
     private ClienteTelefoniaController clienteController;    
-            
-    public JRecarga(ClienteTelefoniaController clienteController) {
+    
+    public JRecarga() {
         initComponents();
-        this.clienteController = clienteController;
-        
-        //se agrega la instancia de clienteTelefonia al cual se mostrara en txtCliente
-        ClienteTelefonia cliente = clienteController.obtenerClienteActual();
-        txtCliente.setText(cliente.getNombre());
-    }               
-
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -62,11 +56,6 @@ public class JRecarga extends javax.swing.JFrame {
         btnRecargar.setText("RECARGAR");
 
         jButton2.setText("VOLVER");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -127,19 +116,42 @@ public class JRecarga extends javax.swing.JFrame {
     private void txtClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClienteActionPerformed
         // instancia con inyección para solo mostrar el cliente creadoe desde el controlador
         //solo se muestra
+        String clienteController = txtCliente.getText();
         
     }//GEN-LAST:event_txtClienteActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-      //ACCIONES PARA VOLVER ATRAS Y QUE SE MANTENGA EL MISMO CLIENTE Y NO SE PIERDA
-      
-      JMain viewMain = new JMain(clienteController);    
-      viewMain.setVisible(true);
-      
-      this.dispose();
-      
-    }//GEN-LAST:event_jButton2ActionPerformed
+ 
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(JRecarga.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(JRecarga.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(JRecarga.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(JRecarga.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
 
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new JRecarga().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRecargar;
@@ -154,4 +166,4 @@ public class JRecarga extends javax.swing.JFrame {
     private javax.swing.JTextField txtCliente;
     private javax.swing.JTextField txtMonto;
     // End of variables declaration//GEN-END:variables
-}       
+}
