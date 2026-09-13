@@ -27,6 +27,8 @@ public class MenuOpciones extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblCom1 = new javax.swing.JLabel();
+        lblCom2 = new javax.swing.JLabel();
         lblMenuPrincipal = new javax.swing.JMenuBar();
         menuInicio = new javax.swing.JMenu();
         itemCrearCliente = new javax.swing.JMenuItem();
@@ -34,10 +36,18 @@ public class MenuOpciones extends javax.swing.JFrame {
         menuHistorial = new javax.swing.JMenu();
         itemReporte = new javax.swing.JMenuItem();
         menuOperaciones = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        itemRecarga = new javax.swing.JMenuItem();
         itemConsumo = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setAutoRequestFocus(false);
+        setBackground(new java.awt.Color(0, 0, 0));
+
+        lblCom1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        lblCom1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCom1.setText("Welcome to the customer registration software");
+
+        lblCom2.setText("Developers: SmithDev and Emanuel");
 
         lblMenuPrincipal.setAlignmentX(1.0F);
         lblMenuPrincipal.setAlignmentY(1.0F);
@@ -72,8 +82,13 @@ public class MenuOpciones extends javax.swing.JFrame {
 
         menuOperaciones.setText("Operaciones");
 
-        jMenuItem2.setText("Recarga");
-        menuOperaciones.add(jMenuItem2);
+        itemRecarga.setText("Recarga");
+        itemRecarga.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemRecargaActionPerformed(evt);
+            }
+        });
+        menuOperaciones.add(itemRecarga);
 
         itemConsumo.setText("Consumo");
         menuOperaciones.add(itemConsumo);
@@ -86,11 +101,24 @@ public class MenuOpciones extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 424, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(22, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lblCom1, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(19, 19, 19))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lblCom2)
+                        .addGap(67, 67, 67))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 388, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(322, Short.MAX_VALUE)
+                .addComponent(lblCom1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblCom2)
+                .addGap(12, 12, 12))
         );
 
         pack();
@@ -109,6 +137,19 @@ public class MenuOpciones extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_itemCrearClienteActionPerformed
 
+    private void itemRecargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemRecargaActionPerformed
+        // se crea la accion de recarga
+        if (!controller.existeCliente()) {
+            javax.swing.JOptionPane.showConfirmDialog(this, "Primero debes de crear al cliente");
+            return;
+        }
+        //se llama la instancia ve viewRecarga
+        JRecarga viewRecarga = new JRecarga(controller);
+        viewRecarga.setVisible(true);
+    
+        this.dispose();
+    }//GEN-LAST:event_itemRecargaActionPerformed
+ 
   
     public static void main(String args[]) {
         try {
@@ -140,9 +181,11 @@ public class MenuOpciones extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem itemConsumo;
     private javax.swing.JMenuItem itemCrearCliente;
+    private javax.swing.JMenuItem itemRecarga;
     private javax.swing.JMenuItem itemReporte;
     private javax.swing.JMenuItem itemSalir;
-    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JLabel lblCom1;
+    private javax.swing.JLabel lblCom2;
     private javax.swing.JMenuBar lblMenuPrincipal;
     private javax.swing.JMenu menuHistorial;
     private javax.swing.JMenu menuInicio;

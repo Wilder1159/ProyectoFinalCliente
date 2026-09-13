@@ -2,15 +2,24 @@
 package main.com.ClienteTelefonia.view;
 
 import main.com.ClienteTelefonia.controller.ClienteTelefoniaController;
+import main.com.ClienteTelefonia.model.ClienteTelefonia;
 
 
 
 public class JRecarga extends javax.swing.JFrame {
 
-    private ClienteTelefoniaController clienteController;    
+    private ClienteTelefoniaController controller;    
     
-    public JRecarga() {
+    //se modifica el constructor para mantener el controlador y no crear uno nuevo
+    public JRecarga(ClienteTelefoniaController controller) {
         initComponents();
+        this.controller = controller;
+        
+        ClienteTelefonia cliente = controller.obtenerClienteActual();
+        if (cliente != null) {
+            txtCliente.setText(cliente.getNombre());
+            txtCliente.setEditable(false);
+        }
     }
     
     @SuppressWarnings("unchecked")
@@ -35,6 +44,7 @@ public class JRecarga extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        lblTitulo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitulo.setText("RECARGA");
         lblTitulo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -54,8 +64,18 @@ public class JRecarga extends javax.swing.JFrame {
         lblMonto.setText("Monto");
 
         btnRecargar.setText("RECARGAR");
+        btnRecargar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRecargarActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("VOLVER");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -75,15 +95,15 @@ public class JRecarga extends javax.swing.JFrame {
                             .addComponent(cboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(77, 77, 77)
+                        .addGap(52, 52, 52)
+                        .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(74, 74, 74)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addComponent(jButton2))
-                            .addComponent(btnRecargar)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnRecargar))))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -103,9 +123,9 @@ public class JRecarga extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(24, 24, 24)
                 .addComponent(btnRecargar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
                 .addContainerGap(27, Short.MAX_VALUE))
         );
@@ -116,42 +136,36 @@ public class JRecarga extends javax.swing.JFrame {
     private void txtClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClienteActionPerformed
         // instancia con inyección para solo mostrar el cliente creadoe desde el controlador
         //solo se muestra
-        String clienteController = txtCliente.getText();
+        String controller = txtCliente.getText();
         
     }//GEN-LAST:event_txtClienteActionPerformed
 
- 
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JRecarga.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JRecarga.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JRecarga.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JRecarga.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    private void btnRecargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecargarActionPerformed
+        // se programa el boton de recargar
+        double monto = Double.parseDouble(txtMonto.getText());
+        
+        int tipo;
+        if (cboTipo.getSelectedItem().equals("Tarjeta")) {
+            tipo = 1;
+        } else {
+            tipo = 2;
         }
-        //</editor-fold>
+        
+        controller.realizarRecarga(tipo, monto);
+        
+        javax.swing.JOptionPane.showMessageDialog(this, "Recarga exitosa.\n" + "Saldo Actuak: S/" + controller.obtenerSaldoActual());
+        
+        txtMonto.setText("");
+    }//GEN-LAST:event_btnRecargarActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new JRecarga().setVisible(true);
-            }
-        });
-    }
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // btn volver
+        MenuOpciones menu = new MenuOpciones(controller);
+        
+        menu.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRecargar;

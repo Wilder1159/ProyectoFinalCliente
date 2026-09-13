@@ -35,6 +35,11 @@ public class ClienteTelefoniaController {
         return clienteActual.realizarConsumo(monto);
     }
     
+    //metodo del boolean para verificar si exite cliente
+     public boolean existeCliente() {
+         return clienteActual != null;
+     }
+    
     //METODOS PARA LAS CONSULTAS DEL REPORTE FINAL
     public String obtenerNombre() {
         return clienteActual.getNombre();
