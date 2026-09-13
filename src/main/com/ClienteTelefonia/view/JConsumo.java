@@ -137,7 +137,7 @@ public class JConsumo extends javax.swing.JFrame {
         double monto = Double.parseDouble(txtMonto.getText());
         boolean realizado = controller.realizarConsumo(monto);
             if (realizado) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Consumo realizado con exito.\n" + "Saldo actual: S/" + controller.obtenerSaldoActual());
+                javax.swing.JOptionPane.showMessageDialog(this, "Consumo realizado con exito.\n" + "Saldo actual: S/." + controller.obtenerSaldoActual());
                 
                 txtMonto.setText("");
             } else {

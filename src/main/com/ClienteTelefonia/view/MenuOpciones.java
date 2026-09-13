@@ -76,6 +76,11 @@ public class MenuOpciones extends javax.swing.JFrame {
         menuHistorial.setText("Historial");
 
         itemReporte.setText("Reporte");
+        itemReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemReporteActionPerformed(evt);
+            }
+        });
         menuHistorial.add(itemReporte);
 
         lblMenuPrincipal.add(menuHistorial);
@@ -166,6 +171,17 @@ public class MenuOpciones extends javax.swing.JFrame {
         viewConsumo.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_itemConsumoActionPerformed
+
+    private void itemReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemReporteActionPerformed
+        // para abrir el JReporte
+        if (!controller.existeCliente()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Registra a tu cliente y realizar el consumo y recarga para poder mostrar la informacion.");
+        return;
+        }
+        JReporte reporte = new JReporte(controller);
+        reporte.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_itemReporteActionPerformed
  
   
     public static void main(String args[]) {
