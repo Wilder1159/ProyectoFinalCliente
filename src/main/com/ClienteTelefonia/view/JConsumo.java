@@ -41,7 +41,7 @@ public class JConsumo extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lblTitulo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        lblTitulo.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitulo.setText("CONSUMO");
 
@@ -50,6 +50,8 @@ public class JConsumo extends javax.swing.JFrame {
 
         lblSaldo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblSaldo.setText("Saldo Actual");
+
+        txtCliente.setEditable(false);
 
         btnConsumir.setText("Consumir");
         btnConsumir.addActionListener(new java.awt.event.ActionListener() {

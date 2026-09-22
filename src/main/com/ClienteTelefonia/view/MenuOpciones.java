@@ -36,12 +36,12 @@ public class MenuOpciones extends javax.swing.JFrame {
         menuHistorial = new javax.swing.JMenu();
         itemReporte = new javax.swing.JMenuItem();
         menuOperaciones = new javax.swing.JMenu();
-        itemRecarga = new javax.swing.JMenuItem();
         itemConsumo = new javax.swing.JMenuItem();
+        menuRecarga = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAutoRequestFocus(false);
-        setBackground(new java.awt.Color(0, 0, 0));
+        setBackground(new java.awt.Color(0, 0, 51));
 
         lblCom1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         lblCom1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -55,7 +55,7 @@ public class MenuOpciones extends javax.swing.JFrame {
 
         menuInicio.setText("Inicio");
 
-        itemCrearCliente.setText("Crear Cliente");
+        itemCrearCliente.setText("CLIENTE");
         itemCrearCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 itemCrearClienteActionPerformed(evt);
@@ -63,7 +63,7 @@ public class MenuOpciones extends javax.swing.JFrame {
         });
         menuInicio.add(itemCrearCliente);
 
-        itemSalir.setText("Salir");
+        itemSalir.setText("SALIR");
         itemSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 itemSalirActionPerformed(evt);
@@ -75,7 +75,7 @@ public class MenuOpciones extends javax.swing.JFrame {
 
         menuHistorial.setText("Historial");
 
-        itemReporte.setText("Reporte");
+        itemReporte.setText("REPORTE");
         itemReporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 itemReporteActionPerformed(evt);
@@ -87,21 +87,21 @@ public class MenuOpciones extends javax.swing.JFrame {
 
         menuOperaciones.setText("Operaciones");
 
-        itemRecarga.setText("Recarga");
-        itemRecarga.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemRecargaActionPerformed(evt);
-            }
-        });
-        menuOperaciones.add(itemRecarga);
-
-        itemConsumo.setText("Consumo");
+        itemConsumo.setText("CONSUMO");
         itemConsumo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 itemConsumoActionPerformed(evt);
             }
         });
         menuOperaciones.add(itemConsumo);
+
+        menuRecarga.setText("RECARGA");
+        menuRecarga.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuRecargaActionPerformed(evt);
+            }
+        });
+        menuOperaciones.add(menuRecarga);
 
         lblMenuPrincipal.add(menuOperaciones);
 
@@ -147,19 +147,6 @@ public class MenuOpciones extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_itemCrearClienteActionPerformed
 
-    private void itemRecargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemRecargaActionPerformed
-        // se crea la accion de recarga
-        if (!controller.existeCliente()) {
-            javax.swing.JOptionPane.showConfirmDialog(this, "Primero debes de crear al cliente");
-            return;
-        }
-        //se llama la instancia de viewRecarga
-        JRecarga viewRecarga = new JRecarga(controller);
-        viewRecarga.setVisible(true);
-    
-        this.dispose();
-    }//GEN-LAST:event_itemRecargaActionPerformed
-
     private void itemConsumoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemConsumoActionPerformed
         // crear el boton de consumo desde el menu de opciones
         if (!controller.existeCliente()) {
@@ -182,6 +169,19 @@ public class MenuOpciones extends javax.swing.JFrame {
         reporte.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_itemReporteActionPerformed
+
+    private void menuRecargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuRecargaActionPerformed
+        // se ingresa al controlador para abrir la opcion y abrir el view recarga
+        if (!controller.existeCliente()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "PRIMERO DEBES DE CREAR AL CLIENTE.");
+            return;
+        }
+        
+        //aca ingresa el objeto para abrir la ventana
+        JRecarga viewRecarga = new JRecarga(controller);
+        viewRecarga.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_menuRecargaActionPerformed
  
   
     public static void main(String args[]) {
@@ -214,7 +214,6 @@ public class MenuOpciones extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem itemConsumo;
     private javax.swing.JMenuItem itemCrearCliente;
-    private javax.swing.JMenuItem itemRecarga;
     private javax.swing.JMenuItem itemReporte;
     private javax.swing.JMenuItem itemSalir;
     private javax.swing.JLabel lblCom1;
@@ -223,5 +222,6 @@ public class MenuOpciones extends javax.swing.JFrame {
     private javax.swing.JMenu menuHistorial;
     private javax.swing.JMenu menuInicio;
     private javax.swing.JMenu menuOperaciones;
+    private javax.swing.JMenuItem menuRecarga;
     // End of variables declaration//GEN-END:variables
 }
