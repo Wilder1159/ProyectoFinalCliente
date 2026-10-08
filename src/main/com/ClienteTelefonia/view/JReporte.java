@@ -102,9 +102,9 @@ public class JReporte extends javax.swing.JFrame {
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         // BTN para volver atras
-        MenuOpciones menu = new MenuOpciones(controller);
-        menu.setVisible(true);
-        this.dispose();
+        
+        String tipo = cboTipo.getSelectedItem().toString();
+
     }//GEN-LAST:event_btnVolverActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

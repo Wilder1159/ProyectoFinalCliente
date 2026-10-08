@@ -39,14 +39,15 @@ public class JRecargaTarjeta extends javax.swing.JFrame {
         txtVencimiento = new javax.swing.JTextField();
         txtCVV = new javax.swing.JTextField();
         txtMonto = new javax.swing.JTextField();
+        btnRecarga = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lblCliente.setText("CLIENTE");
 
-        lblTipo.setText("TIPO DE TAREJETA");
+        lblTipo.setText("TIPO DE TARJETA");
 
-        lblNumeroTarjeta.setText("NÚMERO DE TAJERTA");
+        lblNumeroTarjeta.setText("NÚMERO DE TARJETA");
 
         lblVencimiento.setText("VENCIMIENTO");
 
@@ -60,6 +61,13 @@ public class JRecargaTarjeta extends javax.swing.JFrame {
         btnVolver.setText("VOLVER");
 
         txtNumeroTarjeta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "DÉBITO", "CRÉDITO" }));
+
+        btnRecarga.setText("RECARGAR");
+        btnRecarga.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRecargaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -91,8 +99,13 @@ public class JRecargaTarjeta extends javax.swing.JFrame {
                         .addGap(30, 30, 30))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnVolver)
-                .addGap(152, 152, 152))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnVolver)
+                        .addGap(152, 152, 152))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnRecarga, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(117, 117, 117))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,7 +139,9 @@ public class JRecargaTarjeta extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(68, 68, 68)
+                .addGap(39, 39, 39)
+                .addComponent(btnRecarga)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnVolver)
                 .addContainerGap(43, Short.MAX_VALUE))
         );
@@ -134,9 +149,64 @@ public class JRecargaTarjeta extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnRecargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecargaActionPerformed
+        // BTON DE RECARGA
+        try {
+        String tipoTarjeta = txtNumeroTarjeta.getSelectedItem().toString();
+
+        // Validar campos obligatorios
+        if (tipoTarjeta.isBlank()
+                || txtNumeroTar.getText().isBlank()
+                || txtVencimiento.getText().isBlank()
+                || txtCVV.getText().isBlank()) {
+
+            javax.swing.JOptionPane.showMessageDialog(
+                    this, "Complete los datos de la tarjeta");
+            return;
+        }
+
+        // Obtener monto
+        double monto = Double.parseDouble(txtMonto.getText().trim());
+
+        // Validar monto
+        if (monto <= 0 || !Double.isFinite(monto)) {
+            throw new IllegalArgumentException(
+                    "El monto debe ser mayor que cero.");
+        }
+
+        // Registrar recarga con tarjeta (comisión del 2%)
+        controller.realizarRecarga(1, monto);
+
+        // Mostrar confirmación
+        javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Recarga registrada correctamente."
+                + "Tipo: " + tipoTarjeta + "\n"
+                + "Saldo actual: S/ "
+                + String.format("%.2f",
+                        controller.obtenerSaldoActual())
+        );
+
+        // Regresar al menú principal
+        MenuOpciones menu = new MenuOpciones(controller);
+        menu.setLocationRelativeTo(null);
+        menu.setVisible(true);
+        this.dispose();
+
+    } catch (NumberFormatException ex) {
+        javax.swing.JOptionPane.showMessageDialog(
+                this, "Ingrese un monto numérico válido.");
+
+    } catch (IllegalArgumentException ex) {
+        javax.swing.JOptionPane.showMessageDialog(
+                this, ex.getMessage());
+    }
+    }//GEN-LAST:event_btnRecargaActionPerformed
+
  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnRecarga;
     private javax.swing.JButton btnVolver;
     private javax.swing.JLabel lblCVV;
     private javax.swing.JLabel lblCliente;

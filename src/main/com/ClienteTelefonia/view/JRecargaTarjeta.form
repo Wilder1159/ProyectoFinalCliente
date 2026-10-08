@@ -55,8 +55,16 @@
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              <Component id="btnVolver" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="152" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="btnVolver" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="152" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="btnRecarga" min="-2" pref="137" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="117" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
           </Group>
       </Group>
     </DimensionLayout>
@@ -100,7 +108,9 @@
                   <Component id="lblMonto" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                   <Component id="txtMonto" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+              <Component id="btnRecarga" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="btnVolver" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="43" max="32767" attributes="0"/>
           </Group>
@@ -115,12 +125,12 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblTipo">
       <Properties>
-        <Property name="text" type="java.lang.String" value="TIPO DE TAREJETA"/>
+        <Property name="text" type="java.lang.String" value="TIPO DE TARJETA"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblNumeroTarjeta">
       <Properties>
-        <Property name="text" type="java.lang.String" value="N&#xda;MERO DE TAJERTA"/>
+        <Property name="text" type="java.lang.String" value="N&#xda;MERO DE TARJETA"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblVencimiento">
@@ -172,6 +182,14 @@
     <Component class="javax.swing.JTextField" name="txtCVV">
     </Component>
     <Component class="javax.swing.JTextField" name="txtMonto">
+    </Component>
+    <Component class="javax.swing.JButton" name="btnRecarga">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="RECARGAR"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRecargaActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

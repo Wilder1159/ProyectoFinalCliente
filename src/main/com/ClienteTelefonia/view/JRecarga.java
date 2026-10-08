@@ -91,6 +91,11 @@ public class JRecarga extends javax.swing.JFrame {
         });
 
         btnAtras.setText("ATRAS");
+        btnAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -143,13 +148,39 @@ public class JRecarga extends javax.swing.JFrame {
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         // codigo para abrir la ventana de recarga con tarjeta
-        String TipoRecarga = cboTipo.getSelectedItem().toString();
-            if (TipoRecarga.equals("Tarjeta")) {
-                JRecargaTarjeta viewTarjeta = new JRecargaTarjeta(controller);
-                viewTarjeta.setVisible(true);
-                this.dispose();
-            }
+        String tipoRecarga = cboTipo.getSelectedItem().toString();
+        
+        if (tipoRecarga.equals("TARJETA")) {
+            JRecargaTarjeta viewTarjeta = new JRecargaTarjeta(controller);
+           
+            viewTarjeta.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_btnContinuarActionPerformed
+
+    private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
+        //boton para regresra al menu
+        
+        String tipo = cboTipo.getSelectedItem().toString();
+        
+        if (tipo.isBlank()){
+            javax.swing.JOptionPane.showMessageDialog(this, "Seleccione un tipo de recarga.");
+            return;
+        }
+        
+        if (tipo.equals("TARJETA")){
+            JRecargaTarjeta tarjeta = new JRecargaTarjeta(controller);
+            tarjeta.setLocationRelativeTo(null);
+            tarjeta.setVisible(true);
+            this.dispose();
+        } else if (tipo.equals("EFECTIVO")){
+          JRecargaEfectivo efectivo = new JRecargaEfectivo(controller);  
+          efectivo.setLocationRelativeTo(null);
+          efectivo.setVisible(true);
+          this.dispose();
+        }
+             
+    }//GEN-LAST:event_btnAtrasActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtras;
