@@ -155,7 +155,14 @@ public class JRecarga extends javax.swing.JFrame {
            
             viewTarjeta.setVisible(true);
             this.dispose();
-        }
+            
+            //opcion de efectivo
+        } else if(tipoRecarga.equals("EFECTIVO")){
+            JRecargaEfectivo efectivo = new JRecargaEfectivo(controller);
+            efectivo.setLocationRelativeTo(null);
+            efectivo.setVisible(true);
+            this.dispose();
+        } 
     }//GEN-LAST:event_btnContinuarActionPerformed
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
@@ -173,6 +180,7 @@ public class JRecarga extends javax.swing.JFrame {
             tarjeta.setLocationRelativeTo(null);
             tarjeta.setVisible(true);
             this.dispose();
+            //OPCION DE EFECTIVO
         } else if (tipo.equals("EFECTIVO")){
           JRecargaEfectivo efectivo = new JRecargaEfectivo(controller);  
           efectivo.setLocationRelativeTo(null);

@@ -8,7 +8,7 @@ public class MenuOpciones extends javax.swing.JFrame {
     
     private ClienteTelefoniaController controller;
 
-   //se agrega en el constructor vacio y otro para el parametro de volver
+   //se agrega en el constructor defecto y otro para el parametro de volver
     public MenuOpciones() {
         initComponents();
         
