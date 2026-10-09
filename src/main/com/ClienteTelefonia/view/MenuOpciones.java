@@ -55,7 +55,7 @@ public class MenuOpciones extends javax.swing.JFrame {
 
         menuInicio.setText("Inicio");
 
-        itemCrearCliente.setText("CLIENTE");
+        itemCrearCliente.setText("Cliente");
         itemCrearCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 itemCrearClienteActionPerformed(evt);
@@ -63,7 +63,7 @@ public class MenuOpciones extends javax.swing.JFrame {
         });
         menuInicio.add(itemCrearCliente);
 
-        itemSalir.setText("SALIR");
+        itemSalir.setText("Salir");
         itemSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 itemSalirActionPerformed(evt);
@@ -75,7 +75,7 @@ public class MenuOpciones extends javax.swing.JFrame {
 
         menuHistorial.setText("Historial");
 
-        itemReporte.setText("REPORTE");
+        itemReporte.setText("Reporte");
         itemReporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 itemReporteActionPerformed(evt);
@@ -87,7 +87,7 @@ public class MenuOpciones extends javax.swing.JFrame {
 
         menuOperaciones.setText("Operaciones");
 
-        itemConsumo.setText("CONSUMO");
+        itemConsumo.setText("Consumo");
         itemConsumo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 itemConsumoActionPerformed(evt);
@@ -95,7 +95,7 @@ public class MenuOpciones extends javax.swing.JFrame {
         });
         menuOperaciones.add(itemConsumo);
 
-        menuRecarga.setText("RECARGA");
+        menuRecarga.setText("Recarga");
         menuRecarga.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuRecargaActionPerformed(evt);
