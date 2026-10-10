@@ -26,16 +26,13 @@ public class TwilioLlamadaService {
         String url = "https://api.twilio.com/2010-04-01/Accounts/"
                 + sid + "/Calls.json";
 
-        String twiml = "<Response>"
-                + "<Say language=\"es-ES\">"
-                + "Bienvenido al sistema de telefonia."
-                + "</Say>"
-                + "<Hangup/>"
-                + "</Response>";
+
+        String plantillaTwilio =
+                "https://webhooks.twilio.com/v1/Voice/Template/voice_text_to_speech";
 
         String datos = "To=" + codificar(destino)
-                + "&From=" + codificar(origen)
-                + "&Twiml=" + codificar(twiml);
+                + "&Url=" + codificar(plantillaTwilio);
+
 
         String credenciales = sid + ":" + token;
 
@@ -56,7 +53,8 @@ public class TwilioLlamadaService {
                 solicitud,
                 HttpResponse.BodyHandlers.ofString()
         );
-
+       
+        /* SE CIERRA TEMP
         if (respuesta.statusCode() < 200
                 || respuesta.statusCode() >= 300) {
 
@@ -65,7 +63,27 @@ public class TwilioLlamadaService {
                 + respuesta.statusCode()
             );
         }
+        */
+        
+        if (respuesta.statusCode() < 200
+                || respuesta.statusCode() >= 300) {
 
+            System.err.println(
+                "Error HTTP de Twilio: " + respuesta.statusCode()
+            );
+
+            System.err.println(
+                "Respuesta de Twilio: " + respuesta.body()
+            );
+
+            throw new IllegalStateException(
+                "Twilio rechazó la solicitud. HTTP "
+                + respuesta.statusCode()
+                + ". Revise la consola de NetBeans."
+            );
+        }
+
+        
         return respuesta.body();
     }
 
