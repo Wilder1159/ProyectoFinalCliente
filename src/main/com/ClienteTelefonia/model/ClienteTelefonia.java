@@ -87,11 +87,17 @@ public class ClienteTelefonia {
     // Método para realizar consumos
     public boolean realizarConsumo(double monto) {
 
-        if (monto <= saldoFinal) {
-            saldoFinal -= monto;
-            totalConsumos++;
-            return true;
+        if (!Double.isFinite(monto)|| monto <= 0){
+            throw new IllegalArgumentException("El consumo debe de ser mayor que cero.");
         }
-        return false;
+        
+        if (monto > saldoFinal){
+            return false;
+        }
+        
+        saldoFinal -= monto;
+        totalConsumos++;
+        
+        return true;
     }    
 }
