@@ -15,8 +15,14 @@ public class ClienteTelefoniaController {
     
     //METODOS PARA LAS OPERACIONES
     //primer metodo de crear el cliente
-    public void crearCliente(String nombre, double saldoIncial) {
-        clienteActual = new ClienteTelefonia(nombre, saldoIncial);
+    public void crearCliente(String nombre) {
+        //sobre carga
+        if(nombre == null || nombre.isBlank()) {
+            throw new  IllegalArgumentException("El nombre es obligatario.");
+        }
+        
+        //CREAR Y GUARDAR EL CLIENTE ACTUAL
+        this.clienteActual = new ClienteTelefonia(nombre);
     }
     
     //2do metodo, obtener al cliente actual con los datos ingresados

@@ -30,31 +30,44 @@
                       <Component id="lblTitulo" min="-2" pref="124" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="lblCliente" max="32767" attributes="0"/>
-                          <Component id="lblMonto" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lblSaldo" alignment="0" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="29" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtSaldo" alignment="1" min="-2" pref="71" max="-2" attributes="0"/>
-                          <Component id="txtCliente" alignment="1" min="-2" pref="71" max="-2" attributes="0"/>
-                          <Component id="txtMonto" alignment="1" min="-2" pref="71" max="-2" attributes="0"/>
-                      </Group>
+                      <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                      <Component id="btnVolver" min="-2" pref="86" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btnConsumir" min="-2" pref="86" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="btnConsumir" min="-2" pref="96" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="btnVolver" min="-2" pref="72" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="lblSaldo" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="lblCosto" min="-2" pref="140" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="txtMonto" min="-2" pref="86" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="txtSaldo" min="-2" pref="91" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="lblCliente" min="-2" pref="108" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="txtCliente" min="-2" pref="161" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="0" pref="33" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+              <Component id="lblCronometro" min="-2" pref="236" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -64,25 +77,27 @@
               <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
               <Component id="lblTitulo" min="-2" pref="25" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="txtCliente" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblCliente" min="-2" pref="30" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblSaldo" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                  <Component id="txtSaldo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblCliente" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="txtCliente" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="lblSaldo" min="-2" pref="28" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="txtSaldo" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="lblCronometro" min="-2" pref="89" max="-2" attributes="0"/>
+              <EmptySpace pref="33" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblMonto" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblCosto" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtMonto" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="25" max="32767" attributes="0"/>
-              <Component id="btnConsumir" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnVolver" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnConsumir" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                  <Component id="btnVolver" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -102,7 +117,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Cliente"/>
+        <Property name="text" type="java.lang.String" value="CLIENTE"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblSaldo">
@@ -110,7 +125,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Saldo Actual"/>
+        <Property name="text" type="java.lang.String" value="SALDO DISPONIBLE"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtCliente">
@@ -122,7 +137,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnConsumir">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Consumir"/>
+        <Property name="text" type="java.lang.String" value="LLAMAR"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConsumirActionPerformed"/>
@@ -130,21 +145,23 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnVolver">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Volver"/>
+        <Property name="text" type="java.lang.String" value="VOVLER"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVolverActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblMonto">
+    <Component class="javax.swing.JLabel" name="lblCosto">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Arial" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Monto"/>
+        <Property name="text" type="java.lang.String" value="COSTO ESTIMADO"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtMonto">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblCronometro">
     </Component>
   </SubComponents>
 </Form>

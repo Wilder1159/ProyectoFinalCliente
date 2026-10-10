@@ -112,12 +112,12 @@ public class JRecargaEfectivo extends javax.swing.JFrame {
                             .addComponent(txtMonto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(44, 44, 44)
-                        .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnRecargar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addComponent(lblQR, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblQR, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnRecargar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -159,9 +159,8 @@ public class JRecargaEfectivo extends javax.swing.JFrame {
             
             //se llama al metodo del QR
             mostrarQR();
-            javax.swing.JOptionPane.showMessageDialog(this, "Escanee el código QR" + 
-                                                            "Monto a pagar: S/ " + 
-                                                            String.format("%.2f", monto));
+            javax.swing.JOptionPane.showMessageDialog(this, "Monto a pagar: S/ " + monto + 
+                    "\nEscanee el código QR.");
             
             
             //se realiza las excepciones
@@ -202,7 +201,7 @@ public class JRecargaEfectivo extends javax.swing.JFrame {
             "¿Se verificó el pago de S/ "
             + String.format("%.2f", monto)
             + " en Yape?",
-            "Confirmar pago",
+            "\nConfirmar pago",
             JOptionPane.YES_NO_OPTION
         );
 

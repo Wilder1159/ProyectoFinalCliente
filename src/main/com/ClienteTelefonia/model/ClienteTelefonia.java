@@ -12,10 +12,10 @@ public class ClienteTelefonia {
     private int totalConsumos;
     
     //constructor
-    public ClienteTelefonia(String nombre, double saldoInicial) {
+    public ClienteTelefonia(String nombre) {
         this.nombre = nombre;
-        this.saldoInicial = saldoInicial;
-        this.saldoFinal = saldoInicial;
+        this.saldoInicial = 0;
+        this.saldoFinal = 0;
         this.recargasTarjeta = 0;
         this.recargasEfectivo = 0;
         this.totalConsumos = 0;

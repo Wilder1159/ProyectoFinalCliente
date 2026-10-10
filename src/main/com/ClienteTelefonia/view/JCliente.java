@@ -14,6 +14,8 @@ public class JCliente extends javax.swing.JFrame {
         
         this.controller = controller;
     }
+    
+    
 
  
     @SuppressWarnings("unchecked")
@@ -22,11 +24,11 @@ public class JCliente extends javax.swing.JFrame {
 
         lblTitulo = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
-        lblSaldoInicial = new javax.swing.JLabel();
         btnCrear = new javax.swing.JButton();
         btnVolver = new javax.swing.JButton();
         txtNombre = new javax.swing.JTextField();
-        txtSaldoInicial = new javax.swing.JTextField();
+        lblApellido = new javax.swing.JLabel();
+        txtApellido = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -36,10 +38,7 @@ public class JCliente extends javax.swing.JFrame {
 
         lblNombre.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblNombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblNombre.setText("Nombre:");
-
-        lblSaldoInicial.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        lblSaldoInicial.setText("Saldo Inicial:");
+        lblNombre.setText("NOMBRE");
 
         btnCrear.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnCrear.setText("Crear");
@@ -57,6 +56,8 @@ public class JCliente extends javax.swing.JFrame {
             }
         });
 
+        lblApellido.setText("APELLIDO");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -64,42 +65,44 @@ public class JCliente extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46)
+                        .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnVolver)
-                                .addGap(2, 2, 2)
-                                .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(lblNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblSaldoInicial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(46, 46, 46)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtSaldoInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(16, 16, 16)))
-                .addContainerGap(32, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(16, 16, 16))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(lblApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(32, 32, 32))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSaldoInicial)
-                    .addComponent(txtSaldoInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                    .addComponent(lblApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         pack();
@@ -107,11 +110,57 @@ public class JCliente extends javax.swing.JFrame {
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
         // se crea el btn crear el cliente para que se pueda guardar los datos
-        String nombre = txtNombre.getText();
-        Double saldo = Double.parseDouble(txtSaldoInicial.getText());
-        controller.crearCliente(nombre, saldo);
-        //se muestra la confirmación de la creacion
-        javax.swing.JOptionPane.showConfirmDialog(this, "Cliente creado Correctamente.");
+ try {
+        // 1. Obtener datos del formulario
+        String nombre = txtNombre.getText().trim();
+        String apellido = txtApellido.getText().trim();
+
+        // 2. Validar campos
+        if (nombre.isEmpty() || apellido.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Ingrese el nombre y apellido del cliente."
+            );
+            return;
+        }
+
+        // 3. Unir nombre y apellido
+        String nombreCompleto = nombre + " " + apellido;
+
+        // 4. Crear cliente con saldo inicial de S/ 0.00
+        controller.crearCliente(nombreCompleto);
+
+        // 5. Verificar que se registró correctamente
+        if (controller.obtenerClienteActual() == null) {
+            javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Error al registrar el cliente."
+            );
+            return;
+        }
+
+        // 6. Confirmar registro
+        javax.swing.JOptionPane.showMessageDialog(
+            this,
+            """
+            Cliente registrado correctamente.
+            Nombre: """ + nombreCompleto
+            + "\nSaldo actual: S/ 0.00"
+        );
+
+        // 7. Abrir menú principal
+        MenuOpciones menu = new MenuOpciones(controller);
+        menu.setLocationRelativeTo(null);
+        menu.setVisible(true);
+
+        this.dispose();
+
+    } catch (IllegalArgumentException ex) {
+        javax.swing.JOptionPane.showMessageDialog(
+            this,
+            ex.getMessage()
+        );
+    }
     }//GEN-LAST:event_btnCrearActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
@@ -124,10 +173,10 @@ public class JCliente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCrear;
     private javax.swing.JButton btnVolver;
+    private javax.swing.JLabel lblApellido;
     private javax.swing.JLabel lblNombre;
-    private javax.swing.JLabel lblSaldoInicial;
     private javax.swing.JLabel lblTitulo;
+    private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtSaldoInicial;
     // End of variables declaration//GEN-END:variables
 }
