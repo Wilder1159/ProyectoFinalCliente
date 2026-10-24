@@ -215,7 +215,7 @@ public class JRecargaEfectivo extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(
             this,
             "RECARGA REGISTRADA"
-            + "Cliente: " + controller.obtenerNombre()
+            + "\nCliente: " + controller.obtenerNombre()
             + "\nMonto: S/ " + String.format("%.2f", monto)
             + "\nComisión: S/ 0.00"
             + "\nSaldo actual: S/ "

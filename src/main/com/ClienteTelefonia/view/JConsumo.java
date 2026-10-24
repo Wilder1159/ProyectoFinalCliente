@@ -5,7 +5,7 @@ import main.com.ClienteTelefonia.controller.ClienteTelefoniaController;
 import javax.swing.Timer;
 import javax.swing.JOptionPane;
 import main.com.ClienteTelefonia.service.LlamadaService;
-import main.com.ClienteTelefonia.service.TwilioLlamadaService;
+import main.com.ClienteTelefonia.service.TelnyxLlamadaService;
 
 
 public class JConsumo extends javax.swing.JFrame {
@@ -15,7 +15,7 @@ public class JConsumo extends javax.swing.JFrame {
     
     //ATRIBUTO PARA EL SERVICIO DE LLAMADA SE INTEGRA
     private final LlamadaService llamadaService = new LlamadaService();
-    private final TwilioLlamadaService twilioService = new TwilioLlamadaService();
+    private final TelnyxLlamadaService telnyxService = new TelnyxLlamadaService();
     
     //se agregan los demás atributos
     private Timer cronometro;
@@ -55,59 +55,9 @@ public class JConsumo extends javax.swing.JFrame {
         lblCosto.setText("Costo: S/ 0.00");
     }
     
-    //metodo temporal para el reporte del consumo 
-    private void finalizarLlamada() {
-
-        if (!llamadaActiva) {
-            return;
-        }
-
-        llamadaActiva = false;
-
-        double costo = llamadaService.calcularCosto(
-            segundosTranscurridos
-        );
-
-        // Reutilizar la lógica existente del controlador
-        boolean realizado = controller.realizarConsumo(costo);
-
-        btnConsumir.setEnabled(true);
-        btnVolver.setEnabled(true);
-        cmbTipoLlamada.setEnabled(true);
-        lblEstadoLlamada.setText("Estado: Finalizado");
-
-        if (realizado) {
-
-            double saldoFinal = controller.obtenerSaldoActual();
-
-            txtSaldo.setText(
-                String.format("%.2f", saldoFinal)
-            );
-
-            JOptionPane.showMessageDialog(
-                this,
-                """
-                LLAMADA FINALIZADA
-
-                Duraci\u00f3n: """
-                + String.format("%02d:%02d",
-                    segundosTranscurridos / 60,
-                    segundosTranscurridos % 60)
-                + "\nCosto: S/ "
-                + String.format("%.2f", costo)
-                + "\nSaldo actual: S/ "
-                + String.format("%.2f", saldoFinal)
-            );
-
-        } else {
-            JOptionPane.showMessageDialog(
-                this,
-                "No se pudo registrar el consumo."
-            );
-        }
+    //metodo de finalizar llamada
+    private void finalizarLlamada(){
     }
-
-
    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -150,7 +100,7 @@ public class JConsumo extends javax.swing.JFrame {
             }
         });
 
-        btnVolver.setText("VOVLER");
+        btnVolver.setText("VOLVER");
         btnVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVolverActionPerformed(evt);
@@ -253,7 +203,7 @@ public class JConsumo extends javax.swing.JFrame {
                     .addComponent(lblCosto)
                     .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnConsumir, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20))
@@ -373,78 +323,78 @@ public class JConsumo extends javax.swing.JFrame {
 
         //METODO PARA LA LLAMADA REAL
         private void iniciarLlamadaReal() {
+
+            // 1. Evitar solicitudes duplicadas
             if (llamadaActiva) {
                 return;
             }
 
+            // 2. Verificar que exista un cliente
             if (!controller.existeCliente()) {
                 JOptionPane.showMessageDialog(
-                    this, "Primero debe registrar un cliente."
+                        this,
+                        "Primero debe registrar un cliente."
                 );
                 return;
             }
 
-            //EN LLAMADA SALIENTE QUE SEA +51 DE PERÚ
+            // 3. Obtener y limpiar el número ingresado
             String destino = txtNumeroDestino.getText()
                     .trim()
                     .replaceAll("[\\s-]", "");
 
-            // Agregar +51 automáticamente a números peruanos
+            // Aceptar numeros peruanos
             if (destino.matches("9\\d{8}")) {
                 destino = "+51" + destino;
             }
 
-            // Validar celular peruano: +51 seguido de 9 dígitos
-            if (!destino.matches("\\+519\\d{8}")) {
+            // Validar formato internacional E.164
+            if (!destino.matches("^\\+[1-9]\\d{7,14}$")) {
                 JOptionPane.showMessageDialog(
-                    this,
-                    "Ingrese un número celular peruano válido.\n"
-                    + "Ejemplo: 9XXXXXXXX o +519XXXXXXXX"
+                        this,
+                        "Ingrese un número válido en formato internacional.\n"
+                        + "Ejemplo peruano: +519XXXXXXXX"
                 );
                 return;
             }
 
-            // Mostrar el número normalizado
-            txtNumeroDestino.setText(destino);
+            // 4. Verificar saldo
+            double saldo = controller.obtenerSaldoActual();
 
-
-                        double saldo = controller.obtenerSaldoActual();
-                        double costo = llamadaService.CostoLlamadaCompleta();
-
-                        if (saldo < costo) {
-                            JOptionPane.showMessageDialog(
-                                this,
-                                "Saldo insuficiente.\n"
-                                + "Se requiere S/ "
-                                + String.format("%.2f", costo)
-                            );
-                            return;
-                        }
-
-            lblEstadoLlamada.setText("Estado: Preparada");
-
-            //SE INTEGRA LA API DE TWILIO DE LLAMADA
-            int confirmacion = JOptionPane.showConfirmDialog(
-                this,
-                "¿Desea iniciar una llamada real al número "
-                    + destino + "?\n"
-                    + "Esta operación puede generar cargos en Twilio.",
-                "Confirmar llamada",
-                JOptionPane.YES_NO_OPTION
-            );
-
-            if (confirmacion != JOptionPane.YES_OPTION) {
+            if (saldo <= 0) {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "No tiene saldo disponible. Realice una recarga."
+                );
                 return;
             }
 
+            txtNumeroDestino.setText(destino);
+
+            // 5. Confirmar la llamada antes de enviarla
+            int confirmacion = JOptionPane.showConfirmDialog(
+                    this,
+                    "¿Desea llamar al número " + destino + "?\n"
+                    + "La llamada puede generar cargos reales.",
+                    "Confirmar llamada",
+                    JOptionPane.YES_NO_OPTION
+            );
+
+            if (confirmacion != JOptionPane.YES_OPTION) {
+                lblEstadoLlamada.setText("Estado: En espera");
+                return;
+            }
+
+            // 6. Bloquear controles mientras se envía la solicitud
             llamadaActiva = true;
             btnConsumir.setEnabled(false);
             btnVolver.setEnabled(false);
             cmbTipoLlamada.setEnabled(false);
 
-            lblEstadoLlamada.setText("Estado: Solicitando llamada...");
+            lblEstadoLlamada.setText(
+                    "Estado: Solicitando llamada a Telnyx..."
+            );
 
-            // Guardar destino para utilizarlo en SwingWorker
             final String numeroDestino = destino;
 
             javax.swing.SwingWorker<String, Void> worker =
@@ -452,41 +402,46 @@ public class JConsumo extends javax.swing.JFrame {
 
                 @Override
                 protected String doInBackground() throws Exception {
-                    return twilioService.iniciarLlamada(numeroDestino);
+                    return telnyxService.realizarLlamada(numeroDestino);
                 }
 
                 @Override
                 protected void done() {
-
                     try {
                         String respuesta = get();
 
+                        System.out.println(
+                                "Respuesta de la solicitud: " + respuesta
+                        );
+
                         lblEstadoLlamada.setText(
-                            "Estado: Solicitud aceptada"
+                                "Estado: Solicitud aceptada"
                         );
 
                         JOptionPane.showMessageDialog(
-                            JConsumo.this,
-                            "Twilio recibió la solicitud de llamada.\n"
-                            + "Revisa tu celular y los registros de Twilio."
+                                JConsumo.this,
+                                "Telnyx aceptó la solicitud.\n"
+                                + "Destino: " + numeroDestino + "\n"
+                                + "Esto no confirma que la llamada haya sido contestada."
                         );
-
-                        // La respuesta contiene información de la llamada.
-                        // Todavía falta extraer y guardar el Call SID.
 
                     } catch (Exception ex) {
-
                         lblEstadoLlamada.setText(
-                            "Estado: Error al solicitar llamada"
+                                "Estado: Error al solicitar llamada"
                         );
 
+                        ex.printStackTrace();
+
                         JOptionPane.showMessageDialog(
-                            JConsumo.this,
-                            "No se pudo solicitar la llamada.\n"
-                            + ex.getMessage()
+                                JConsumo.this,
+                                "No se pudo solicitar la llamada.\n"
+                                + ex.getMessage(),
+                                "Error de Telnyx",
+                                JOptionPane.ERROR_MESSAGE
                         );
 
                     } finally {
+                        // Liberar la interfaz al terminar la solicitud HTTP
                         llamadaActiva = false;
                         btnConsumir.setEnabled(true);
                         btnVolver.setEnabled(true);
@@ -496,8 +451,8 @@ public class JConsumo extends javax.swing.JFrame {
             };
 
             worker.execute();
-
         }
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -517,4 +472,6 @@ public class JConsumo extends javax.swing.JFrame {
     private javax.swing.JTextField txtNumeroDestino;
     private javax.swing.JTextField txtSaldo;
     // End of variables declaration//GEN-END:variables
+
+ 
 }

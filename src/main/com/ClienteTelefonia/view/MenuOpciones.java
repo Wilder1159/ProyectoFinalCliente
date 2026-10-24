@@ -29,12 +29,15 @@ public class MenuOpciones extends javax.swing.JFrame {
 
         lblCom1 = new javax.swing.JLabel();
         lblCom2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         lblMenuPrincipal = new javax.swing.JMenuBar();
         menuInicio = new javax.swing.JMenu();
         itemCrearCliente = new javax.swing.JMenuItem();
         itemSalir = new javax.swing.JMenuItem();
         menuHistorial = new javax.swing.JMenu();
         itemReporte = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         menuOperaciones = new javax.swing.JMenu();
         itemConsumo = new javax.swing.JMenuItem();
         menuRecarga = new javax.swing.JMenuItem();
@@ -48,6 +51,10 @@ public class MenuOpciones extends javax.swing.JFrame {
         lblCom1.setText("Welcome to the customer registration software");
 
         lblCom2.setText("Developers: SmithDev and Emanuel");
+
+        jButton1.setText("jButton1");
+
+        jButton2.setText("jButton2");
 
         lblMenuPrincipal.setAlignmentX(1.0F);
         lblMenuPrincipal.setAlignmentY(1.0F);
@@ -82,6 +89,14 @@ public class MenuOpciones extends javax.swing.JFrame {
             }
         });
         menuHistorial.add(itemReporte);
+
+        jMenuItem1.setText("Gestion Clientes");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        menuHistorial.add(jMenuItem1);
 
         lblMenuPrincipal.add(menuHistorial);
 
@@ -182,6 +197,13 @@ public class MenuOpciones extends javax.swing.JFrame {
         viewRecarga.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_menuRecargaActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        //AQUI SE LLAMA EL OBJETO
+        JGestionClientes viewGestion = new JGestionClientes(controller);
+        viewGestion.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
  
   
     public static void main(String args[]) {
@@ -216,6 +238,9 @@ public class MenuOpciones extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemCrearCliente;
     private javax.swing.JMenuItem itemReporte;
     private javax.swing.JMenuItem itemSalir;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JLabel lblCom1;
     private javax.swing.JLabel lblCom2;
     private javax.swing.JMenuBar lblMenuPrincipal;

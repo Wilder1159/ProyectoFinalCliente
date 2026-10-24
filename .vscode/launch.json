@@ -1,0 +1,27 @@
+
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "MenuOpciones",
+            "request": "launch",
+            "mainClass": "main.com.ClienteTelefonia.view.MenuOpciones",
+            "projectName": "ProyectoFinal_25ea717f"
+        },
+        {
+            "type": "java",
+            "name": "PruebaClienteDAO",
+            "request": "launch",
+            "mainClass": "main.com.ClienteTelefonia.PruebaClienteDAO",
+            "projectName": "ProyectoFinal_25ea717f"
+        },
+        {
+            "type": "java",
+            "name": "PruebaConexionSQLServer",
+            "request": "launch",
+            "mainClass": "main.com.ClienteTelefonia.PruebaConexionSQLServer",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

@@ -1,7 +1,9 @@
 
 package main.com.ClienteTelefonia.view;
 
+import javax.swing.JOptionPane;
 import main.com.ClienteTelefonia.controller.ClienteTelefoniaController;
+import main.com.ClienteTelefonia.model.ClienteTelefonia;
 
 
 public class JCliente extends javax.swing.JFrame {
@@ -29,6 +31,8 @@ public class JCliente extends javax.swing.JFrame {
         txtNombre = new javax.swing.JTextField();
         lblApellido = new javax.swing.JLabel();
         txtApellido = new javax.swing.JTextField();
+        lblTelefono = new javax.swing.JLabel();
+        txtTelefono = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,6 +62,8 @@ public class JCliente extends javax.swing.JFrame {
 
         lblApellido.setText("APELLIDO");
 
+        lblTelefono.setText("TELEFONO");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -68,22 +74,26 @@ public class JCliente extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(46, 46, 46)
-                        .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE))
+                        .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnVolver)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(16, 16, 16))))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 56, Short.MAX_VALUE)
+                        .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(lblApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblTelefono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE))
+                        .addGap(36, 36, 36)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtApellido)
+                            .addComponent(txtTelefono))))
                 .addGap(32, 32, 32))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addComponent(btnVolver)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,11 +108,15 @@ public class JCliente extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         pack();
@@ -110,57 +124,44 @@ public class JCliente extends javax.swing.JFrame {
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
         // se crea el btn crear el cliente para que se pueda guardar los datos
- try {
-        // 1. Obtener datos del formulario
         String nombre = txtNombre.getText().trim();
         String apellido = txtApellido.getText().trim();
-
-        // 2. Validar campos
-        if (nombre.isEmpty() || apellido.isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(
-                this,
-                "Ingrese el nombre y apellido del cliente."
-            );
+        String telefono = txtTelefono.getText().trim();
+        
+        if(nombre.isEmpty() || apellido.isEmpty() || telefono.isEmpty()){
+            javax.swing.JOptionPane.showMessageDialog(this, "Ingrese los datos completos solicitados.");
             return;
         }
-
-        // 3. Unir nombre y apellido
-        String nombreCompleto = nombre + " " + apellido;
-
-        // 4. Crear cliente con saldo inicial de S/ 0.00
-        controller.crearCliente(nombreCompleto);
-
-        // 5. Verificar que se registró correctamente
-        if (controller.obtenerClienteActual() == null) {
-            javax.swing.JOptionPane.showMessageDialog(
-                this,
-                "Error al registrar el cliente."
+        
+        try {
+            ClienteTelefonia cliente = controller.registrarCliente(nombre, apellido, telefono, null);
+            javax.swing.JOptionPane.showMessageDialog(this, "Cliente registrado correctamente\n"+
+                                                            "ID: " + cliente.getIdCliente() + "\n" + 
+                                                            "Nombre: " + cliente.getNombre() + " " + 
+                                                            cliente.getApellido() + "\n" + 
+                                                            "Telefono: " + cliente.getTelefono() + "\n" + 
+                                                            "Saldo: 0.00\n" + "REGISTRO EXITOSO" + "\n" + javax.swing.JOptionPane.INFORMATION_MESSAGE
             );
-            return;
+            
+            MenuOpciones menu = new MenuOpciones(controller);
+            menu.setLocationRelativeTo(null);
+            menu.setVisible(true);
+            this.dispose();
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Validación", JOptionPane.WARNING_MESSAGE);
+        } catch (java.sql.SQLException ex) {
+            String mensaje = ex.getMessage();
+            
+            //2601 y 2627: violacion de indices o restricciones unicas de SQL
+            if (ex.getErrorCode() == 2601 || ex.getErrorCode() ==2627){
+                mensaje = "El telefono o el correo ya estan registrados. " + "Verificar los datos";
+            }
+            
+            JOptionPane.showMessageDialog(this, "No se pudo registrar al cliente en la base de datos.\n" + mensaje, 
+                                            "Error en la base de datos", JOptionPane.ERROR_MESSAGE);
+        } catch (IllegalStateException ex){
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Operacion no permitida", JOptionPane.ERROR_MESSAGE);
         }
-
-        // 6. Confirmar registro
-        javax.swing.JOptionPane.showMessageDialog(
-            this,
-            """
-            Cliente registrado correctamente.
-            Nombre: """ + nombreCompleto
-            + "\nSaldo actual: S/ 0.00"
-        );
-
-        // 7. Abrir menú principal
-        MenuOpciones menu = new MenuOpciones(controller);
-        menu.setLocationRelativeTo(null);
-        menu.setVisible(true);
-
-        this.dispose();
-
-    } catch (IllegalArgumentException ex) {
-        javax.swing.JOptionPane.showMessageDialog(
-            this,
-            ex.getMessage()
-        );
-    }
     }//GEN-LAST:event_btnCrearActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
@@ -175,8 +176,10 @@ public class JCliente extends javax.swing.JFrame {
     private javax.swing.JButton btnVolver;
     private javax.swing.JLabel lblApellido;
     private javax.swing.JLabel lblNombre;
+    private javax.swing.JLabel lblTelefono;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }

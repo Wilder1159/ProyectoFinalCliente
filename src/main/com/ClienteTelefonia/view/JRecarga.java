@@ -165,7 +165,10 @@ public class JRecarga extends javax.swing.JFrame {
     }//GEN-LAST:event_btnContinuarActionPerformed
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
-        //boton para regresra al menu
+        //boton
+        MenuOpciones menu = new MenuOpciones(controller);
+        menu.setVisible(true);
+        this.dispose();
         
     }//GEN-LAST:event_btnAtrasActionPerformed
 

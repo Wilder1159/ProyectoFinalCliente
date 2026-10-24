@@ -3,31 +3,98 @@ package main.com.ClienteTelefonia.model;
 
 
 public class ClienteTelefonia {
-    //atributos privados
+    //se modifica la clase prinicipal para agregar y modificar desde la base de datos
+  // Identificación del cliente
+    private long idCliente;
     private String nombre;
+    private String apellido;
+    private String telefono;
+    private String correo;
+    private String estado;
+
+    // Datos de la telefonia
     private double saldoInicial;
     private double saldoFinal;
     private int recargasTarjeta;
     private int recargasEfectivo;
     private int totalConsumos;
-    
-    //constructor
-    public ClienteTelefonia(String nombre) {
-        this.nombre = nombre;
+
+    // Constructor vacío: permite crear objetos desde el base de datos
+    public ClienteTelefonia() {
         this.saldoInicial = 0;
         this.saldoFinal = 0;
         this.recargasTarjeta = 0;
         this.recargasEfectivo = 0;
         this.totalConsumos = 0;
+        this.estado = "ACTIVO";
     }
 
-    //getters and setters
+    // Conservamos el constructor que ya utilizaba tu aplicación
+    public ClienteTelefonia(String nombre) {
+        this();
+        this.nombre = nombre;
+    }
+
+    // Constructor para los datos de identidad
+    public ClienteTelefonia(
+            String nombre,
+            String apellido,
+            String telefono,
+            String correo) {
+
+        this();
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.telefono = telefono;
+        this.correo = correo;
+    }
+
+    public long getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(long idCliente) {
+        this.idCliente = idCliente;
+    }
+
     public String getNombre() {
         return nombre;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public double getSaldoInicial() {
@@ -70,34 +137,43 @@ public class ClienteTelefonia {
         this.totalConsumos = totalConsumos;
     }
 
-    
-    //metodos para el calculo de consumo y recarga
+    // METODO Recarga: 1 = tarjeta, 2 = efectivo
     public void realizarRecarga(int tipo, double monto) {
-        if(tipo == 1) {
-            //tarjeta = Descuento del 2%
+
+        if (!Double.isFinite(monto) || monto <= 0) {
+            throw new IllegalArgumentException(
+                "El monto de la recarga debe ser mayor que cero."
+            );
+        }
+
+        if (tipo == 1) {
             saldoFinal += monto * 0.98;
             recargasTarjeta++;
-        } else if (tipo == 2){
-            //efectivo =  se agrega el monto completo
+        } else if (tipo == 2) {
             saldoFinal += monto;
             recargasEfectivo++;
+        } else {
+            throw new IllegalArgumentException(
+                "El tipo de recarga no es válido."
+            );
         }
     }
-    
-    // Método para realizar consumos
+
     public boolean realizarConsumo(double monto) {
 
-        if (!Double.isFinite(monto)|| monto <= 0){
-            throw new IllegalArgumentException("El consumo debe de ser mayor que cero.");
+        if (!Double.isFinite(monto) || monto <= 0) {
+            throw new IllegalArgumentException(
+                "El consumo debe ser mayor que cero."
+            );
         }
-        
-        if (monto > saldoFinal){
+
+        if (monto > saldoFinal) {
             return false;
         }
-        
+
         saldoFinal -= monto;
         totalConsumos++;
-        
+
         return true;
-    }    
+    }
 }
