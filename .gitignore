@@ -27,3 +27,6 @@ config/local.properties
 
 # Archivos temporales
 *.log
+
+#BLOQUEAR LA BASE DE DATOS
+test/dto/db/db_ClienteTelefonia.sql
