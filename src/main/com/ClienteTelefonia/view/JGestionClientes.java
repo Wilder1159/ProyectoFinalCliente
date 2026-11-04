@@ -70,6 +70,8 @@ public class JGestionClientes extends javax.swing.JFrame {
             return;
         }
 
+        
+
         long idCliente = ((Number)
             modelo.getValueAt(fila, 0)).longValue();
 
@@ -87,7 +89,7 @@ public class JGestionClientes extends javax.swing.JFrame {
         }
 
         try {
-            if (controller.eliminarCliente(idCliente)) {
+            if (controller.eliminarCliente(idCliente)){
                 JOptionPane.showMessageDialog(
                     this, "Cliente eliminado correctamente."
                 );
@@ -97,16 +99,18 @@ public class JGestionClientes extends javax.swing.JFrame {
                     this, "No se encontró el cliente."
                 );
             }
-        } catch (SQLException e) {
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(
                 this,
                 "No se pudo eliminar el cliente.\n"
-                    + e.getMessage(),
+                    + ex.getMessage(),
                 "Error",
                 JOptionPane.ERROR_MESSAGE
             );
         }
     }
+
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -123,6 +127,7 @@ public class JGestionClientes extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblClientes = new javax.swing.JTable();
+        btnSeleccionar = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -204,6 +209,13 @@ public class JGestionClientes extends javax.swing.JFrame {
 
         jScrollPane2.setViewportView(jScrollPane3);
 
+        btnSeleccionar.setText("Seleccionar");
+        btnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeleccionarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -223,8 +235,10 @@ public class JGestionClientes extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnEliminar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 118, Short.MAX_VALUE)))
+                                .addComponent(btnSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnVolver)))
+                        .addGap(0, 32, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -234,14 +248,15 @@ public class JGestionClientes extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblAdmin)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -271,10 +286,43 @@ public class JGestionClientes extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
 
+    private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
+        // ACTIVAR EL CLIENTE DE LA FILA SELECIONADA
+        int fila = tblClientes.getSelectedRow();
+        
+        if (fila == -1){
+             JOptionPane.showMessageDialog(this, "Debe seleccionar un cliente de la tabla.",
+            "Selección requerida", JOptionPane.WARNING_MESSAGE
+        );
+            return;
+        }
+        
+        int filaModelo = tblClientes.convertColumnIndexToModel(fila);
+        
+        long idCliente = ((Number) modelo.getValueAt(filaModelo, 0)).longValue();
+        
+        try {
+            controller.seleccionarCliente(idCliente);
+            
+            ClienteTelefonia cliente = controller.obtenerClienteActual();
+            
+            JOptionPane.showMessageDialog(this, "Cliente seleccionado correctamente.\n" + "ID: " + cliente.getIdCliente() + "\n" +
+                                            "Nombre: " + cliente.getNombre() + " " + cliente.getApellido() + "\n"+ 
+                                            "Cliente esta activo." + JOptionPane.INFORMATION_MESSAGE);
+            
+            MenuOpciones menu = new MenuOpciones(controller);
+            menu.setVisible(true);
+            this.dispose();
+        } catch (SQLException | IllegalArgumentException e){
+            JOptionPane.showMessageDialog(this, "No se pudo seleccionar al cliente.\n" + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnSeleccionarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnNuevo;
+    private javax.swing.JButton btnSeleccionar;
     private javax.swing.JButton btnVolver;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

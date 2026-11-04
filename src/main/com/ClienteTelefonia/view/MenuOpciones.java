@@ -2,24 +2,47 @@
 package main.com.ClienteTelefonia.view;
 
 import main.com.ClienteTelefonia.controller.ClienteTelefoniaController;
+import main.com.ClienteTelefonia.controller.LoginController;
 
 
 public class MenuOpciones extends javax.swing.JFrame {
     
+    //ATRIBUTOS
     private ClienteTelefoniaController controller;
+    private String rolUsuario;
 
    //se agrega en el constructor defecto y otro para el parametro de volver
     public MenuOpciones() {
         initComponents();
         
-        controller = new ClienteTelefoniaController(); 
-    }
+        controller = new ClienteTelefoniaController();
+        this.rolUsuario = "CLIENTE";
+        configurarMenuPorRol();
+     }
     
-    //constructos con parametro
-    public MenuOpciones(ClienteTelefoniaController controller){
+        //constructos con parametros del controlador
+        public MenuOpciones(ClienteTelefoniaController controller){
         initComponents();
-        
         this.controller = controller;
+        this.rolUsuario = "CLIENTE";
+        configurarMenuPorRol();
+        }
+        
+        //3ER CONSTRUCTOR, EL ROL Y CONTROLADOR PARA LAS VALIDACIONES DE MOSTRAR OPCIONES OCULTAS
+        public MenuOpciones(ClienteTelefoniaController controller, String rolUsuario) {
+            initComponents();
+            this.controller = controller;
+            this.rolUsuario = rolUsuario;
+            configurarMenuPorRol();
+        }
+        
+        
+        //nuevo metodo para validar el rol
+        private void configurarMenuPorRol(){
+        boolean esAdmin = "ADMIN".equalsIgnoreCase(rolUsuario);
+      
+        //SOLO EL ADMIN PUEDE GESTIONAR GESTIONAR CLIENTES
+        cbmoGestionClientes.setVisible(esAdmin);
     }
 
   
@@ -33,11 +56,10 @@ public class MenuOpciones extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         lblMenuPrincipal = new javax.swing.JMenuBar();
         menuInicio = new javax.swing.JMenu();
-        itemCrearCliente = new javax.swing.JMenuItem();
         itemSalir = new javax.swing.JMenuItem();
         menuHistorial = new javax.swing.JMenu();
         itemReporte = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        cbmoGestionClientes = new javax.swing.JMenuItem();
         menuOperaciones = new javax.swing.JMenu();
         itemConsumo = new javax.swing.JMenuItem();
         menuRecarga = new javax.swing.JMenuItem();
@@ -62,15 +84,7 @@ public class MenuOpciones extends javax.swing.JFrame {
 
         menuInicio.setText("Inicio");
 
-        itemCrearCliente.setText("Cliente");
-        itemCrearCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemCrearClienteActionPerformed(evt);
-            }
-        });
-        menuInicio.add(itemCrearCliente);
-
-        itemSalir.setText("Salir");
+        itemSalir.setText("Cerrar Sesion");
         itemSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 itemSalirActionPerformed(evt);
@@ -90,13 +104,13 @@ public class MenuOpciones extends javax.swing.JFrame {
         });
         menuHistorial.add(itemReporte);
 
-        jMenuItem1.setText("Gestion Clientes");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        cbmoGestionClientes.setText("Gestion Clientes");
+        cbmoGestionClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                cbmoGestionClientesActionPerformed(evt);
             }
         });
-        menuHistorial.add(jMenuItem1);
+        menuHistorial.add(cbmoGestionClientes);
 
         lblMenuPrincipal.add(menuHistorial);
 
@@ -150,17 +164,14 @@ public class MenuOpciones extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void itemSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemSalirActionPerformed
-        //para salir del programa en el btn de salir
-        System.exit(0);
-    }//GEN-LAST:event_itemSalirActionPerformed
-
-    private void itemCrearClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCrearClienteActionPerformed
-        // para llamar a la JCliente, se crea la accion
+        //para salir del programa en el btn de cerra sesion 
+        LoginController loginController = new LoginController();
         
-        JCliente viewCliente = new JCliente(controller);
-        viewCliente.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_itemCrearClienteActionPerformed
+        JLogin login = new JLogin(loginController);
+        login.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_itemSalirActionPerformed
 
     private void itemConsumoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemConsumoActionPerformed
         // crear el boton de consumo desde el menu de opciones
@@ -198,49 +209,21 @@ public class MenuOpciones extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_menuRecargaActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void cbmoGestionClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbmoGestionClientesActionPerformed
         //AQUI SE LLAMA EL OBJETO
         JGestionClientes viewGestion = new JGestionClientes(controller);
         viewGestion.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_cbmoGestionClientesActionPerformed
  
-  
-    public static void main(String args[]) {
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenuOpciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenuOpciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenuOpciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenuOpciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MenuOpciones().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem cbmoGestionClientes;
     private javax.swing.JMenuItem itemConsumo;
-    private javax.swing.JMenuItem itemCrearCliente;
     private javax.swing.JMenuItem itemReporte;
     private javax.swing.JMenuItem itemSalir;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JLabel lblCom1;
     private javax.swing.JLabel lblCom2;
     private javax.swing.JMenuBar lblMenuPrincipal;

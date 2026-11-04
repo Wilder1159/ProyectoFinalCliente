@@ -4,6 +4,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "JLogin",
+            "request": "launch",
+            "mainClass": "main.com.ClienteTelefonia.view.JLogin",
+            "projectName": "ProyectoFinal_25ea717f"
+        },
+        {
+            "type": "java",
+            "name": "TelnyxWebhookServer",
+            "request": "launch",
+            "mainClass": "main.com.ClienteTelefonia.service.TelnyxWebhookServer",
+            "projectName": "ProyectoFinal_25ea717f"
+        },
+        {
+            "type": "java",
             "name": "MenuOpciones",
             "request": "launch",
             "mainClass": "main.com.ClienteTelefonia.view.MenuOpciones",

@@ -2,9 +2,7 @@
 package main.com.ClienteTelefonia.view;
 
 import main.com.ClienteTelefonia.controller.ClienteTelefoniaController;
-import javax.swing.Timer;
 import javax.swing.JOptionPane;
-import main.com.ClienteTelefonia.service.LlamadaService;
 import main.com.ClienteTelefonia.service.TelnyxLlamadaService;
 
 
@@ -14,12 +12,9 @@ public class JConsumo extends javax.swing.JFrame {
     private ClienteTelefoniaController controller;
     
     //ATRIBUTO PARA EL SERVICIO DE LLAMADA SE INTEGRA
-    private final LlamadaService llamadaService = new LlamadaService();
     private final TelnyxLlamadaService telnyxService = new TelnyxLlamadaService();
     
     //se agregan los demás atributos
-    private Timer cronometro;
-    private int segundosTranscurridos = 0;
     private boolean llamadaActiva = false;
     
     
@@ -28,8 +23,6 @@ public class JConsumo extends javax.swing.JFrame {
         initComponents();
         
         //se agregar la el numero de destino
-        cmbTipoLlamada.setSelectedItem("SIMULADA");
-
         txtNumeroDestino.setEnabled(true);
 
         lblEstadoLlamada.setText("Estado: En espera");
@@ -55,9 +48,7 @@ public class JConsumo extends javax.swing.JFrame {
         lblCosto.setText("Costo: S/ 0.00");
     }
     
-    //metodo de finalizar llamada
-    private void finalizarLlamada(){
-    }
+
    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -73,8 +64,6 @@ public class JConsumo extends javax.swing.JFrame {
         lblCosto = new javax.swing.JLabel();
         txtMonto = new javax.swing.JTextField();
         lblCronometro = new javax.swing.JLabel();
-        cmbTipoLlamada = new javax.swing.JComboBox<>();
-        lblTipoLlamada = new javax.swing.JLabel();
         lblNumeroDestino = new javax.swing.JLabel();
         txtNumeroDestino = new javax.swing.JTextField();
         lblEstadoLlamada = new javax.swing.JLabel();
@@ -110,10 +99,6 @@ public class JConsumo extends javax.swing.JFrame {
         lblCosto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblCosto.setText("COSTO ESTIMADO");
 
-        cmbTipoLlamada.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "SIMULADA", "REAL" }));
-
-        lblTipoLlamada.setText("TIPO DE LLAMADA");
-
         lblNumeroDestino.setText("NUMERO DE DESTINO");
 
         lblEstadoLlamada.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -124,54 +109,45 @@ public class JConsumo extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(49, 49, 49)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(lblCronometro, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(lblEstadoLlamada, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(33, 33, 33)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblNumeroDestino)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtNumeroDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(lblSaldo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(107, 107, 107)
+                        .addComponent(txtSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(2, 2, 2)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblTipoLlamada, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(cmbTipoLlamada, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtNumeroDestino, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblNumeroDestino, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)))
-                        .addGap(0, 33, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(34, 34, 34)
-                            .addComponent(lblCronometro, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(lblCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(166, 166, 166)
-                        .addComponent(btnConsumir, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addComponent(lblEstadoLlamada, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(lblCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnConsumir, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(72, 72, 72))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,30 +159,26 @@ public class JConsumo extends javax.swing.JFrame {
                     .addComponent(lblCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(lblSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTipoLlamada, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbTipoLlamada, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(lblNumeroDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNumeroDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                    .addComponent(lblSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNumeroDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNumeroDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblCronometro, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblEstadoLlamada, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                .addComponent(lblEstadoLlamada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCosto))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCosto)
-                    .addComponent(txtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnConsumir, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20))
+                .addGap(26, 26, 26))
         );
 
         pack();
@@ -226,101 +198,16 @@ public class JConsumo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnConsumirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsumirActionPerformed
-        // bnt para poder sim la llamada
-        //código de la llamada
+        //btn de llamda, esta pasara directo a real
             if (llamadaActiva) {
             return;
         }
 
-        String tipo = (String) cmbTipoLlamada.getSelectedItem();
+        iniciarLlamadaReal();
 
-        if (null == tipo) {
-            JOptionPane.showMessageDialog(
-                    this, "Seleccione un tipo de llamada."
-            );
-        } else switch (tipo) {
-            case "SIMULADA" -> iniciarLlamadaSimulada();
-            case "REAL" -> iniciarLlamadaReal();
-            default -> JOptionPane.showMessageDialog(
-                        this, "Seleccione un tipo de llamada."
-                );
-        }
     }//GEN-LAST:event_btnConsumirActionPerformed
 
     //METODOS PARA PODER REALIZAR LA LLAMADA SIM Y REAL
-    //METOD PARA LA SIMULADA
-        private void iniciarLlamadaSimulada() {
-
-            if (llamadaActiva) {
-                return;
-            }
-
-            if (!controller.existeCliente()) {
-                JOptionPane.showMessageDialog(
-                    this, "Primero debe registrar un cliente."
-                );
-                return;
-            }
-
-            double saldo = controller.obtenerSaldoActual();
-            double costo = llamadaService.CostoLlamadaCompleta();
-
-            if (saldo < costo) {
-                JOptionPane.showMessageDialog(
-                    this,
-                    "Saldo insuficiente.\nCosto: S/ "
-                    + String.format("%.2f", costo)
-                    + "\nSaldo disponible: S/ "
-                    + String.format("%.2f", saldo)
-                );
-                return;
-            }
-
-            segundosTranscurridos = 0;
-            llamadaActiva = true;
-
-            btnConsumir.setEnabled(false);
-            btnVolver.setEnabled(false);
-            cmbTipoLlamada.setEnabled(false);
-
-            lblCronometro.setText("00:00");
-            lblEstadoLlamada.setText("Estado: En llamada simulada");
-            lblCosto.setText("Costo: S/ 0.00");
-            txtMonto.setText("0.00");
-
-            cronometro = new Timer(1000, e -> {
-
-                segundosTranscurridos++;
-
-                int minutos = segundosTranscurridos / 60;
-                int segundos = segundosTranscurridos % 60;
-
-                lblCronometro.setText(
-                    String.format("%02d:%02d", minutos, segundos)
-                );
-
-                double costoActual =
-                    llamadaService.calcularCosto(segundosTranscurridos);
-
-                lblCosto.setText(
-                    "Costo: S/ " + String.format("%.2f", costoActual)
-                );
-
-                txtMonto.setText(
-                    String.format("%.2f", costoActual)
-                );
-
-                if (segundosTranscurridos >=
-                        LlamadaService.DURACION_SEGUNDOS) {
-
-                    cronometro.stop();
-                    finalizarLlamada();
-                }
-            });
-
-            cronometro.start();
-        }
-
         //METODO PARA LA LLAMADA REAL
         private void iniciarLlamadaReal() {
 
@@ -389,11 +276,7 @@ public class JConsumo extends javax.swing.JFrame {
             llamadaActiva = true;
             btnConsumir.setEnabled(false);
             btnVolver.setEnabled(false);
-            cmbTipoLlamada.setEnabled(false);
 
-            lblEstadoLlamada.setText(
-                    "Estado: Solicitando llamada a Telnyx..."
-            );
 
             final String numeroDestino = destino;
 
@@ -443,9 +326,12 @@ public class JConsumo extends javax.swing.JFrame {
                     } finally {
                         // Liberar la interfaz al terminar la solicitud HTTP
                         llamadaActiva = false;
-                        btnConsumir.setEnabled(true);
+
+                        btnConsumir.setEnabled(true);   
                         btnVolver.setEnabled(true);
-                        cmbTipoLlamada.setEnabled(true);
+                        txtNumeroDestino.setEnabled(true);
+
+                        lblEstadoLlamada.setText("Estado: ");
                     }
                 }
             };
@@ -458,14 +344,12 @@ public class JConsumo extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConsumir;
     private javax.swing.JButton btnVolver;
-    private javax.swing.JComboBox<String> cmbTipoLlamada;
     private javax.swing.JLabel lblCliente;
     private javax.swing.JLabel lblCosto;
     private javax.swing.JLabel lblCronometro;
     private javax.swing.JLabel lblEstadoLlamada;
     private javax.swing.JLabel lblNumeroDestino;
     private javax.swing.JLabel lblSaldo;
-    private javax.swing.JLabel lblTipoLlamada;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JTextField txtCliente;
     private javax.swing.JTextField txtMonto;

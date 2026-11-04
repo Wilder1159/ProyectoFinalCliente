@@ -5,6 +5,8 @@ import main.com.ClienteTelefonia.controller.ClienteTelefoniaController;
 import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import java.awt.Image;
+import java.sql.SQLException;
+
 import main.com.ClienteTelefonia.model.ClienteTelefonia;
 
 public class JRecargaEfectivo extends javax.swing.JFrame {
@@ -178,62 +180,80 @@ public class JRecargaEfectivo extends javax.swing.JFrame {
 
     private void btnRecargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecargarActionPerformed
         // btn de recarga
-       try {
-        if (!controller.existeCliente()) {
-            JOptionPane.showMessageDialog(
-                this, "No existe un cliente registrado.");
-            return;
-        }
+        try {
+                if (!controller.existeCliente()) {
+                    JOptionPane.showMessageDialog(
+                        this,
+                        "No existe un cliente seleccionado."
+                    );
+                    return;
+                }
 
-        double monto = Double.parseDouble(
-            txtMonto.getText().trim()
-        );
+                double monto = Double.parseDouble(txtMonto.getText().trim());
 
-        if (!Double.isFinite(monto) || monto <= 0) {
-            JOptionPane.showMessageDialog(
-                this, "Ingrese un monto mayor que cero.");
-            return;
-        }
+                if (!Double.isFinite(monto) || monto <= 0) {
+                    JOptionPane.showMessageDialog(
+                        this,
+                        "Ingrese un monto mayor que cero."
+                    );
+                    return;
+                }
 
-        // Confirmación manual para la práctica académica
-        int confirmar = JOptionPane.showConfirmDialog(
-            this,
-            "¿Se verificó el pago de S/ "
-            + String.format("%.2f", monto)
-            + " en Yape?",
-            "\nConfirmar pago",
-            JOptionPane.YES_NO_OPTION
-        );
+                int confirmar = JOptionPane.showConfirmDialog(
+                    this,
+                    "Cliente: " + controller.obtenerNombre()
+                        + "\nMonto: S/ " + String.format("%.2f", monto)
+                        + "\nComisión: S/ 0.00"
+                        + "\nSaldo que se acreditará: S/ "
+                        + String.format("%.2f", monto)
+                        + "\n\n¿Verificó el pago en Yape?",
+                    "Confirmar pago de Yape",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE
+                );
 
-        if (confirmar != JOptionPane.YES_OPTION) {
-            return;
-        }
+                if (confirmar != JOptionPane.YES_OPTION) {
+                    JOptionPane.showMessageDialog(
+                        this,
+                        "Operación cancelada. No se registró la recarga."
+                    );
+                    return;
+                }
 
-        // Tipo 2: recarga sin comisión
-        controller.realizarRecarga(2, monto);
+                double nuevoSaldo = controller.registrarRecargaYape(monto);
 
-        JOptionPane.showMessageDialog(
-            this,
-            "RECARGA REGISTRADA"
-            + "\nCliente: " + controller.obtenerNombre()
-            + "\nMonto: S/ " + String.format("%.2f", monto)
-            + "\nComisión: S/ 0.00"
-            + "\nSaldo actual: S/ "
-            + String.format("%.2f",
-                controller.obtenerSaldoActual())
-        );
+                JOptionPane.showMessageDialog(
+                    this,
+                    "¡RECARGA REGISTRADA CORRECTAMENTE!"
+                        + "\nMétodo: Yape"
+                        + "\nEstado: CONFIRMADA MANUALMENTE"
+                        + "\nMonto: S/ " + String.format("%.2f", monto)
+                        + "\nComisión: S/ 0.00"
+                        + "\nSaldo actual: S/ "
+                        + String.format("%.2f", nuevoSaldo)
+                );
 
-        MenuOpciones menu = new MenuOpciones(controller);
-        menu.setLocationRelativeTo(null);
-        menu.setVisible(true);
-        this.dispose();
+                MenuOpciones menu = new MenuOpciones(controller);
+                menu.setLocationRelativeTo(null);
+                menu.setVisible(true);
+                this.dispose();
 
-    } catch (NumberFormatException ex) {
-        JOptionPane.showMessageDialog(
-            this, "Ingrese un monto numérico válido.");
-    } catch (IllegalArgumentException ex) {
-        JOptionPane.showMessageDialog(this, ex.getMessage());
-    }
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(
+                    this,
+                    "Ingrese un monto numérico válido."
+                );
+            } catch (IllegalArgumentException | IllegalStateException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(
+                    this,
+                    "No se pudo registrar la recarga en la base de datos."
+                        + "\nDetalle: " + ex.getMessage(),
+                    "Error de base de datos",
+                    JOptionPane.ERROR_MESSAGE
+                );
+            }
     }//GEN-LAST:event_btnRecargarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

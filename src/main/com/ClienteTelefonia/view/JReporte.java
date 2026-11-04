@@ -14,33 +14,9 @@ public class JReporte extends javax.swing.JFrame {
         initComponents();
         
         this.controller = controller;
-        
-        viewReporte();
     }
     
-    //metodo para mostrar el reporte
-    private void viewReporte() {
-       String reporte = "";
-       
-      reporte += String.format("| %-22s %-17s |\n", "Cliente:",
-              controller.obtenerNombre());
-      reporte += String.format("| %-22s S/ %-14.2f |\n", "Saldo Actual:",
-              controller.obtenerSaldoActual());
-      reporte += "===========================\n";
-      
-      reporte += String.format("| %-30s %9d |\n", "Recarga con Tarjeta:",
-              controller.obtenerRecargasTarjeta());
-      reporte += String.format("| %-30s %9d |\n", "Recarga en Efectivo:",
-              controller.obtenerRecargasEfectivo());
-      
-      reporte += String.format("| %-30s %9d |\n", "Total de consumos:",
-              controller.obtenerTotalConsumo());
-      
-      reporte += "===========================\n";
-      
-      // todo para mostrar en txtArea
-      txtReporte.setText(reporte);
-    }
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -50,6 +26,7 @@ public class JReporte extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtReporte = new javax.swing.JTextArea();
         btnVolver = new javax.swing.JButton();
+        btnReporte = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,6 +45,13 @@ public class JReporte extends javax.swing.JFrame {
             }
         });
 
+        btnReporte.setText("GENERAR REPORTE");
+        btnReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReporteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -79,10 +63,13 @@ public class JReporte extends javax.swing.JFrame {
                         .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(34, 34, 34)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(128, 128, 128)
-                        .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnReporte))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -91,9 +78,11 @@ public class JReporte extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lblTitulo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18))
         );
 
@@ -107,7 +96,14 @@ public class JReporte extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
 
+    private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
+        //btn de reporte a ReporteModerno
+        ReporteModerno reporte = new ReporteModerno(controller);
+        reporte.setVisible(true);
+    }//GEN-LAST:event_btnReporteActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnReporte;
     private javax.swing.JButton btnVolver;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTitulo;

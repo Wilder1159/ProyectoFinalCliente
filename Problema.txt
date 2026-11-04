@@ -11,3 +11,31 @@ insuficiente. Si la opción elegida es ‘F’ (Fin), se deben mostrar los sigui
 • Saldo final.
 • Número de recargas realizadas en efectivo y con tarjeta.
 • Número total de consumos efectuados.
+
+
+
+
+
+
+
+///comandos par reinicar en SQL el ID ¿Cómo reiniciar el ID desde 1?
+Si estás realizando pruebas y la tabla dbo.Cliente está completamente vacía, puedes ejecutar:
+USE ClienteTelefoniaDB;
+GO
+
+DBCC CHECKIDENT ('dbo.Cliente', RESEED, 0);
+GO
+
+¿Debo reiniciar los IDs cada vez que elimino clientes?
+No es recomendable.
+
+En una aplicación real, los IDs no tienen que ser consecutivos. Su función es identificar cada registro de manera única, no contar cuántos clientes existen.
+
+Mi recomendación para tu proyecto es:
+- Durante las pruebas, puedes reiniciar IDENTITY si la tabla está vacía y verificaste las relaciones.
+- Cuando el sistema esté funcionando con datos reales, deja que SQL Server continúe generando IDs.
+-
+
+
+
+
