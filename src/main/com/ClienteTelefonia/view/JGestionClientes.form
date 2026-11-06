@@ -55,7 +55,7 @@
                           <Component id="lblTitulo" min="-2" pref="180" max="-2" attributes="0"/>
                           <Component id="lblAdmin" min="-2" pref="223" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="btnNuevo" min="-2" pref="105" max="-2" attributes="0"/>
+                              <Component id="btnNuevo" min="-2" pref="135" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnActualizar" min="-2" pref="110" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -66,7 +66,7 @@
                               <Component id="btnVolver" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="0" pref="32" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="54" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>

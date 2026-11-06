@@ -32,6 +32,8 @@ public class LoginController {
             );
         }
 
+        //PARA LA CONSULTA DEL USURIO CON SEGURIDA Y CONFIRMAR LA LIMPIEZA Y NO SE GUARDE EN MEMORIA EL PASSWORD
+          try {
         Usuario usuario = usuarioDAO.buscarPorUsername(username);
 
         if (usuario == null || !usuario.isActivo()) {
@@ -63,5 +65,9 @@ public class LoginController {
         }
 
         return usuario;
+
+        } finally {
+            java.util.Arrays.fill(password, '\0');
+        }
     }
 }
